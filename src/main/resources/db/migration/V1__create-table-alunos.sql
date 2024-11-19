@@ -1,4 +1,4 @@
-CREATE TABLE tb_aluno (
+CREATE TABLE IF NOT EXISTS tb_aluno (
     id int not null primary key auto_increment,
     nome varchar(100),
     email varchar(100),
