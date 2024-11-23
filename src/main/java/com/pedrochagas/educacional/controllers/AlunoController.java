@@ -1,5 +1,7 @@
 package com.pedrochagas.educacional.controllers;
 
+import com.pedrochagas.educacional.dtos.AlunoRequestDTO;
+import com.pedrochagas.educacional.dtos.AlunoResponseDTO;
 import com.pedrochagas.educacional.entities.Aluno;
 import com.pedrochagas.educacional.services.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +20,19 @@ public class AlunoController {
     private AlunoService alunoService;
 
     @GetMapping
-    public ResponseEntity<List<Aluno>> listarAlunos(){
+    public ResponseEntity<List<AlunoResponseDTO>> listarAlunos(){
         return ResponseEntity.ok(alunoService.listarAlunos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Aluno> buscarAlunoPorId(
+    public ResponseEntity<AlunoResponseDTO> buscarAlunoPorId(
             @PathVariable(name = "id") Integer id){
         return ResponseEntity.ok(alunoService.buscarAlunoPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<Aluno> salvarAluno(@RequestBody Aluno aluno){
-        aluno = alunoService.salvarAluno(aluno);
+    public ResponseEntity<AlunoResponseDTO> salvarAluno(@RequestBody AlunoRequestDTO dto){
+        AlunoResponseDTO aluno = alunoService.salvarAluno(dto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -46,11 +48,11 @@ public class AlunoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Aluno> atualizarAluno(
+    public ResponseEntity<AlunoResponseDTO> atualizarAluno(
             @PathVariable Integer id,
-            @RequestBody Aluno novosDados
+            @RequestBody AlunoRequestDTO dto
     ){
-        Aluno aluno = alunoService.atualizarAluno(novosDados,id);
+        AlunoResponseDTO aluno = alunoService.atualizarAluno(dto,id);
         return ResponseEntity.ok(aluno);
     }
 }
