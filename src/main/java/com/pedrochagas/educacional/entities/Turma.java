@@ -1,9 +1,15 @@
 package com.pedrochagas.educacional.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tb_turma")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Turma {
 
     @Id
@@ -18,45 +24,5 @@ public class Turma {
     @JoinColumn(name = "curso_id")
     private Curso curso;
 
-    public Turma() {
-    }
 
-    public Turma(Integer id, Integer ano, Integer semestre, Curso curso) {
-        this.id = id;
-        this.ano = ano;
-        this.semestre = semestre;
-        this.curso = curso;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getAno() {
-        return ano;
-    }
-
-    public void setAno(Integer ano) {
-        this.ano = ano;
-    }
-
-    public Integer getSemestre() {
-        return semestre;
-    }
-
-    public void setSemestre(Integer semestre) {
-        this.semestre = semestre;
-    }
-
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
 }
