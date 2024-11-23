@@ -5,15 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
-@Table(name = "tb_curso")
+@Table(name = "tb_disciplina")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Curso {
+public class Disciplina {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +20,11 @@ public class Curso {
 
     private String codigo;
 
-    private Integer cargaHoraria;
+    @ManyToOne
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
 
-    @OneToMany(mappedBy = "curso")
-    private List<Turma> turmas = new ArrayList<>();
-
-    @OneToMany(mappedBy = "curso")
-    private List<Disciplina> disciplinas = new ArrayList<>();
-
-
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
 }

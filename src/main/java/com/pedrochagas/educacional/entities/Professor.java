@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_professor")
 @Data
@@ -24,5 +27,6 @@ public class Professor {
 
     private String especialidade;
 
-
+    @OneToMany(mappedBy = "professor")
+    private List<Disciplina> disciplinas = new ArrayList<>();
 }
