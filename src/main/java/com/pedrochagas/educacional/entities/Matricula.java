@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_matricula")
 @AllArgsConstructor
@@ -23,4 +26,7 @@ public class Matricula {
     @ManyToOne
     @JoinColumn(name = "turma_id",referencedColumnName = "id")
     private Turma turma;
+
+    @OneToMany(mappedBy = "matricula")
+    private List<Nota> notas = new ArrayList<>();
 }

@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_disciplina")
 @Data
@@ -27,4 +30,7 @@ public class Disciplina {
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
+
+    @OneToMany(mappedBy = "disciplina")
+    private List<Nota> notas = new ArrayList<>();
 }
