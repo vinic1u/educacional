@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_aluno")
@@ -21,6 +23,9 @@ public class Aluno {
     private String email;
     private String matricula;
     private LocalDate dataNascimento;
+
+    @OneToMany(mappedBy = "aluno")
+    private List<Matricula> matriculas;
 
 
 }
