@@ -2,7 +2,9 @@ package com.pedrochagas.educacional.controllers;
 
 import com.pedrochagas.educacional.dtos.AlunoRequestDTO;
 import com.pedrochagas.educacional.dtos.AlunoResponseDTO;
+import com.pedrochagas.educacional.dtos.NotaResponseDTO;
 import com.pedrochagas.educacional.entities.Aluno;
+import com.pedrochagas.educacional.projections.AlunoNotaProjection;
 import com.pedrochagas.educacional.services.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,13 @@ public class AlunoController {
         return ResponseEntity.ok(alunoService.buscarAlunoPorId(id));
     }
 
+    @GetMapping("/{id}/notas")
+    public ResponseEntity<List<AlunoNotaProjection>> listarNotasDoAluno(
+            @PathVariable Integer id
+    ){
+        return ResponseEntity.ok(alunoService.listarNotasDoAluno(id));
+    }
+
     @PostMapping
     public ResponseEntity<AlunoResponseDTO> salvarAluno(@RequestBody AlunoRequestDTO dto){
         AlunoResponseDTO aluno = alunoService.salvarAluno(dto);
@@ -55,4 +64,6 @@ public class AlunoController {
         AlunoResponseDTO aluno = alunoService.atualizarAluno(dto,id);
         return ResponseEntity.ok(aluno);
     }
+
+
 }

@@ -2,9 +2,13 @@ package com.pedrochagas.educacional.services;
 
 import com.pedrochagas.educacional.dtos.AlunoRequestDTO;
 import com.pedrochagas.educacional.dtos.AlunoResponseDTO;
+import com.pedrochagas.educacional.dtos.NotaResponseDTO;
 import com.pedrochagas.educacional.entities.Aluno;
+import com.pedrochagas.educacional.entities.Nota;
 import com.pedrochagas.educacional.exceptions.RecursoNaoEncontradoException;
+import com.pedrochagas.educacional.projections.AlunoNotaProjection;
 import com.pedrochagas.educacional.repositories.AlunoRepository;
+import com.pedrochagas.educacional.repositories.NotaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +19,9 @@ public class AlunoService {
 
     @Autowired
     private AlunoRepository alunoRepository;
+
+    @Autowired
+    private NotaRepository notaRepository;
 
     public List<AlunoResponseDTO> listarAlunos(){
         return alunoRepository.findAll().stream().map(AlunoResponseDTO::new).toList();
@@ -50,6 +57,12 @@ public class AlunoService {
     public void deletarAlunoPorId(Integer id){
         Aluno aluno = alunoRepository.findById(id).orElseThrow(()->new RecursoNaoEncontradoException("Aluno com ID: " + id + " não encontrado"));
         alunoRepository.delete(aluno);
+    }
+
+    public List<AlunoNotaProjection> listarNotasDoAluno(Integer id){
+        Aluno aluno = alunoRepository.findById(id).orElseThrow(()->new RecursoNaoEncontradoException("Aluno com ID: " + id + " não encontrado"));
+        List<AlunoNotaProjection> notas = notaRepository.listarNotasPorAluno(id);
+        return notas;
     }
 
 }
