@@ -2,6 +2,7 @@ package com.pedrochagas.educacional.controllers;
 
 import com.pedrochagas.educacional.dtos.DisciplinaRequestDTO;
 import com.pedrochagas.educacional.dtos.DisciplinaResponseDTO;
+import com.pedrochagas.educacional.dtos.NotaResponseDTO;
 import com.pedrochagas.educacional.services.DisciplinaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,11 @@ public class DisciplinaController {
     @GetMapping("/{id}")
     public ResponseEntity<DisciplinaResponseDTO> buscarDisciplinaPorId(@PathVariable Integer id){
         return ResponseEntity.ok(disciplinaService.buscarDisciplinaPorId(id));
+    }
+
+    @GetMapping("/{id}/notas")
+    public ResponseEntity<List<NotaResponseDTO>> listarNotasPorDisciplina(@PathVariable Integer id){
+        return ResponseEntity.ok(disciplinaService.listarNotasPorDisciplina(id));
     }
 
     @PostMapping

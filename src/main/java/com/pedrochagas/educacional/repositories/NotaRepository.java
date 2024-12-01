@@ -19,4 +19,10 @@ public interface NotaRepository extends JpaRepository<Nota,Integer> {
                 "WHERE a.id = :alunoId"
     )
     List<AlunoNotaProjection> listarNotasPorAluno(Integer alunoId);
+
+    @Query(
+    value = "SELECT obj " +
+            "FROM Nota obj " +
+            "WHERE obj.disciplina.id = :disciplinaId")
+    List<Nota> listarNotasPorDisciplina(Integer disciplinaId);
 }
