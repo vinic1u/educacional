@@ -19,8 +19,10 @@ public class Curso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(columnDefinition = "VARCHAR(100)")
     private String nome;
 
+    @Column(columnDefinition = "VARCHAR(20)")
     private String codigo;
 
     private Integer cargaHoraria;

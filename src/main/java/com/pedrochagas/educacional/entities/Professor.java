@@ -19,12 +19,16 @@ public class Professor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(columnDefinition = "VARCHAR(100)")
     private String nome;
 
+    @Column(columnDefinition = "VARCHAR(100)")
     private String email;
 
+    @Column(columnDefinition = "VARCHAR(15)")
     private String telefone;
 
+    @Column(columnDefinition = "VARCHAR(100)")
     private String especialidade;
 
     @OneToMany(mappedBy = "professor")
