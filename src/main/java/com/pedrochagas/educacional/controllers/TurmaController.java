@@ -1,5 +1,6 @@
 package com.pedrochagas.educacional.controllers;
 
+import com.pedrochagas.educacional.dtos.NotaResponseDTO;
 import com.pedrochagas.educacional.dtos.TurmaRequestDTO;
 import com.pedrochagas.educacional.dtos.TurmaResponseDTO;
 import com.pedrochagas.educacional.services.TurmaService;
@@ -26,6 +27,11 @@ public class TurmaController {
     @GetMapping("/{id}")
     public ResponseEntity<TurmaResponseDTO> buscarTurmaPorId(@PathVariable Integer id){
         return ResponseEntity.ok(turmaService.buscarTurmaPorId(id));
+    }
+
+    @GetMapping("/{id}/notas")
+    public ResponseEntity<List<NotaResponseDTO>> listarNotasPorTurma(@PathVariable Integer id){
+        return ResponseEntity.ok(turmaService.listarNotasPorTurma(id));
     }
 
     @PostMapping

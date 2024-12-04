@@ -1,11 +1,14 @@
 package com.pedrochagas.educacional.services;
 
+import com.pedrochagas.educacional.dtos.NotaResponseDTO;
 import com.pedrochagas.educacional.dtos.TurmaRequestDTO;
 import com.pedrochagas.educacional.dtos.TurmaResponseDTO;
 import com.pedrochagas.educacional.entities.Curso;
+import com.pedrochagas.educacional.entities.Nota;
 import com.pedrochagas.educacional.entities.Turma;
 import com.pedrochagas.educacional.exceptions.RecursoNaoEncontradoException;
 import com.pedrochagas.educacional.repositories.CursoRepository;
+import com.pedrochagas.educacional.repositories.NotaRepository;
 import com.pedrochagas.educacional.repositories.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,9 @@ public class TurmaService {
 
     @Autowired
     private CursoRepository cursoRepository;
+
+    @Autowired
+    private NotaRepository notaRepository;
 
     public List<TurmaResponseDTO> listarTurmas(){
         return turmaRepository.findAll().stream().map(TurmaResponseDTO::new).toList();
@@ -57,5 +63,11 @@ public class TurmaService {
 
         turmaRepository.save(turma);
         return new TurmaResponseDTO(turma);
+    }
+
+    public List<NotaResponseDTO> listarNotasPorTurma(Integer id){
+        Turma turma = turmaRepository.findById(id).orElseThrow(()-> new RecursoNaoEncontradoException("Turma com ID: " + id + " não encontrado"));
+        List<Nota> notas = notaRepository.listarNotasPorTurma(id);
+        return notas.stream().map(NotaResponseDTO::new).toList();
     }
 }
